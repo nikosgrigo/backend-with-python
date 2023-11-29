@@ -1,6 +1,6 @@
 import functions as f
 
-unit_choices = {'meters':['feet', 'yards'],
+UNIT_CHOICES = {'meters':['feet', 'yards'],
                 'celsius':["fahrenheit"],
                 'square meter':["acre"],
                 'kilogram':["ounce","pound"],
@@ -9,7 +9,7 @@ unit_choices = {'meters':['feet', 'yards'],
                 'joule':["calorie","watt"],
                 'meter per second':["feet per second","miles per hour"],}
 
-unitList =list(unit_choices.keys())
+unitList =list(UNIT_CHOICES.keys())
 
 def init():
 
@@ -23,22 +23,22 @@ def init():
       print(unitList)
       fromUnitString = input("Select one unit from the above list:").lower()
 
-      if dipslay_available_convertions(fromUnitString):
+      if dipslay_available_conversions(fromUnitString):
 
          toUnitString = input("Now please enter unit to convert to:").lower()
 
-         if is_valid_convertion(fromUnitString,toUnitString):
+         if is_valid_conversion(fromUnitString,toUnitString):
             measurement_converter(value,fromUnitString,toUnitString)
          else:
             print("Something went wrong!")
 
-def dipslay_available_convertions(unit:str):
+def dipslay_available_conversions(unit:str):
     '''This function 1.checks if current unit is available on the unit list (as key)
                      2.returns true if unit that user provided exists
     '''
 
-    if unit in unit_choices:
-      print(f"You can convert {unit} to: {unit_choices[unit]}")
+    if unit in UNIT_CHOICES:
+      print(f"You can convert {unit} to: {UNIT_CHOICES[unit]}")
       return True
     else:
       print(f"Oops sorry but this converter does not support {unit} unit yet!")
@@ -52,7 +52,7 @@ def get_user_input():
    except ValueError:
       print("Error message:Invalid input from user Please provide a number.")
 
-def is_valid_convertion(fromUnit:str,toUnit:str):
+def is_valid_conversion(fromUnit:str,toUnit:str):
    '''This function checks if the provided unit to convert exists in my list AND
      then checks if the unit to convert to is possible
      
@@ -62,13 +62,12 @@ def is_valid_convertion(fromUnit:str,toUnit:str):
                  toUnit - convert to this unit
    '''
 
-   if fromUnit in unit_choices and toUnit in unit_choices[fromUnit]:
+   if fromUnit in UNIT_CHOICES and toUnit in UNIT_CHOICES[fromUnit]:
       return True
    else:
       return False
 
 def measurement_converter(value,fromUnit,toUnit):
-   # print("Start convertion...")
    print("---------------------------")
 
    fromUnit = fromUnit.replace(" ","_")
@@ -85,6 +84,7 @@ def measurement_converter(value,fromUnit,toUnit):
         # Call the function
        result = getattr(f, function_name)(value)
        print(f'{value} in {fromUnit} is equal to {result} in {toUnit}')
+       return result
    else:
         print(f"Function '{function_name}' not found.")
 
