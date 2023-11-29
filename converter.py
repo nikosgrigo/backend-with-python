@@ -47,8 +47,8 @@ def dipslay_available_convertions(unit:str):
 def get_user_input():
    '''This function ask user to enter a valid number and if not throws an error'''
    try:
-    value = float(input("Enter a value to convert:"))
-    return value
+      value = float(input("Enter a value to convert:"))
+      return ispositiveNumber(value)
    except ValueError:
       print("Error message:Invalid input from user Please provide a number.")
 
@@ -87,6 +87,12 @@ def measurement_converter(value,fromUnit,toUnit):
        print(f'{value} in {fromUnit} is equal to {result} in {toUnit}')
    else:
         print(f"Function '{function_name}' not found.")
+
+def ispositiveNumber(value):
+   if value >= 0 :
+      return value
+   else:
+      return False
 
 init()
 
