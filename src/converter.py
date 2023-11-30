@@ -1,5 +1,7 @@
 import functions as f
 
+'''You can convert only from key ---> values not the opposite'''
+
 UNIT_CHOICES = {'meters':['feet', 'yards'],
                 'celsius':["fahrenheit"],
                 'square meter':["acre"],
@@ -61,7 +63,6 @@ def is_valid_conversion(fromUnit:str,toUnit:str):
      Parameters: fromUnit - current unit for convertion
                  toUnit - convert to this unit
    '''
-
    if fromUnit in UNIT_CHOICES and toUnit in UNIT_CHOICES[fromUnit]:
       return True
    else:
@@ -83,6 +84,7 @@ def measurement_converter(value,fromUnit,toUnit):
    if hasattr(f, function_name) and callable(getattr(f, function_name)):
         # Call the function
        result = getattr(f, function_name)(value)
+       result = round(result,2)
        print(f'{value} in {fromUnit} is equal to {result} in {toUnit}')
        return result
    else:
@@ -94,7 +96,8 @@ def ispositiveNumber(value):
    else:
       return False
 
-init()
 
+#The program execution start here with this function - DELETE COMMENT TO RUN
+# init()
 
-
+# assert is_valid_conversion("","") == False,"Should be False"
