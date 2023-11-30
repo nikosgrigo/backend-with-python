@@ -74,14 +74,11 @@ def measurement_converter(value,fromUnit,toUnit):
    fromUnit = fromUnit.replace(" ","_")
    toUnit = toUnit.replace(" ","_")
 
-   # print(fromUnit,toUnit)
-
    function_name = f"{fromUnit}_to_{toUnit}"
-
-   # print(function_name)
 
    # Check if the function exists in the module
    if hasattr(f, function_name) and callable(getattr(f, function_name)):
+       
         # Call the function
        result = getattr(f, function_name)(value)
        result = round(result,2)
@@ -100,4 +97,4 @@ def ispositiveNumber(value):
 #The program execution start here with this function - DELETE COMMENT TO RUN
 # init()
 
-# assert is_valid_conversion("","") == False,"Should be False"
+
