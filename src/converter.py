@@ -15,42 +15,37 @@ unitList =list(UNIT_CHOICES.keys())
 
 def init():
 
-    '''Start program execution'''
+   '''Start program execution'''
 
-    value = get_user_input()
+   value = get_user_input()
 
-    if(value):
+   print("Please insert a valid unit to convert...")
+   print(unitList)
+   fromUnitString = input("Select one unit from the above list:").lower()
 
-      print("Please insert a valid unit to convert...")
-      print(unitList)
-      fromUnitString = input("Select one unit from the above list:").lower()
+   dipslay_available_conversions(fromUnitString)
 
-      if dipslay_available_conversions(fromUnitString):
+   toUnitString = input("Now please enter unit to convert to:").lower()
 
-         toUnitString = input("Now please enter unit to convert to:").lower()
-
-         if is_valid_conversion(fromUnitString,toUnitString):
-            measurement_converter(value,fromUnitString,toUnitString)
-         else:
-            print("Something went wrong!")
+   if is_valid_conversion(fromUnitString,toUnitString):
+      measurement_converter(value,fromUnitString,toUnitString)
+   else:
+      print("Something went wrong!")
 
 def dipslay_available_conversions(unit:str):
     '''This function 1.checks if current unit is available on the unit list (as key)
                      2.returns true if unit that user provided exists
     '''
-
     if unit in UNIT_CHOICES:
       print(f"You can convert {unit} to: {UNIT_CHOICES[unit]}")
-      return True
     else:
       print(f"Oops sorry but this converter does not support {unit} unit yet!")
-      return False
 
 def get_user_input():
    '''This function ask user to enter a valid number and if not throws an error'''
    try:
       value = float(input("Enter a value to convert:"))
-      return ispositiveNumber(value)
+      return value
    except ValueError:
       print("Error message:Invalid input from user Please provide a number.")
 
@@ -83,18 +78,10 @@ def measurement_converter(value,fromUnit,toUnit):
        result = getattr(f, function_name)(value)
        result = round(result,2)
        print(f'{value} in {fromUnit} is equal to {result} in {toUnit}')
-       return result
    else:
         print(f"Function '{function_name}' not found.")
 
-def ispositiveNumber(value):
-   if value >= 0 :
-      return value
-   else:
-      return False
-
-
 #The program execution start here with this function - DELETE COMMENT TO RUN
-# init()
+init()
 
 
